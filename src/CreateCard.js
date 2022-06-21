@@ -60,7 +60,11 @@ export default function CreateCard() {
               HTML
             </label>
             <label className="myLabel">
-              <input type="checkbox" onChange={(e) => handleChange(e)} />
+              <input 
+                type="checkbox" 
+                value="CSS"
+                onChange={(e) => handleChange(e)} 
+              />
               CSS
             </label>
             <label className="myLabel">
@@ -90,7 +94,7 @@ export default function CreateCard() {
             <label className="myLabel">
               <input
                 type="checkbox"
-                value="NodeJS"
+                value="Node"
                 onChange={(e) => handleChange(e)}
               />
               Node.JS
