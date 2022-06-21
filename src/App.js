@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import "./styles.css";
+import { Router, Outlet, ReactLocation } from "@tanstack/react-location";
+import { createContext, useContext, useState } from "react";
+import CreateCard from "./CreateCard";
+import CardShowcase from "./CardShowcase";
 
-function App() {
+const FormDataContext = createContext();
+
+export const useFormData = () => {
+  const context = useContext(FormDataContext);
+  return context;
+};
+
+const location = new ReactLocation();
+
+export default function App() {
+
+  const [formData, setFormData] = useState ({
+    fullName: "",
+    aboutMe: "",
+    githubURL: "",
+    twitterURL: "",
+    favouriteBooks: "",
+    HTML: false,
+    CSS: false,
+    JS: false,
+    Git: false,
+    React: false,
+    Node: false
+  });
+
+  const routes = [
+    {
+      path: "/",
+      element: <CreateCard />
+    },
+    {
+      path: "showcase",
+      element: <CardShowcase />
+    }
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router routes={routes} location={location}>
+      <FormDataContext.Provider value={{ formData, setFormData }}>
+        <Outlet />
+      </FormDataContext.Provider>
+    </Router>
   );
 }
-
-export default App;
